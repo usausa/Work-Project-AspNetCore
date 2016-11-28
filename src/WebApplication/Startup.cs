@@ -1,27 +1,30 @@
-﻿using System.Buffers;
-using System.IO;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-
-namespace WebApplication
+﻿namespace WebApplication
 {
+    using System.Buffers;
+    using System.IO;
+
     using Dapper;
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc.Controllers;
+    using Microsoft.AspNetCore.Mvc.Formatters;
     using Microsoft.AspNetCore.Mvc.ViewComponents;
+    using Microsoft.AspNetCore.Routing;
     using Microsoft.Data.Sqlite;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
 
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Serialization;
+
     using Smart.Resolver;
 
     using WebApplication.Infrastructure.Data;
     using WebApplication.Infrastructure.Resolver;
+    using WebApplication.Settings;
 
     /// <summary>
     ///
@@ -56,6 +59,11 @@ namespace WebApplication
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.Configure<RouteOptions>(options =>
+            {
+                options.LowercaseUrls = true;
+            });
+
             services.AddMvc(options =>
             {
                 options.OutputFormatters.RemoveType<JsonOutputFormatter>();
@@ -83,6 +91,8 @@ namespace WebApplication
 
             services.AddSingleton<IControllerActivator>(new SmartResolverControllerActivator(resolver));
             services.AddSingleton<IViewComponentActivator>(new SmartResolverViewComponentActivator(resolver));
+
+            services.AddOptions();
 
             // Setup
             SetupResolver();
@@ -142,6 +152,12 @@ namespace WebApplication
             resolver
                 .Bind<IConnectionFactory>()
                 .ToConstant(new CallbackConnectionFactory(() => new SqliteConnection(connectionString)));
+
+            var settings = new SmtpSettings();
+            Configuration.GetSection("SmtpSettings").Bind(settings);
+            resolver
+                .Bind<SmtpSettings>()
+                .ToConstant(settings);
         }
 
         /// <summary>
