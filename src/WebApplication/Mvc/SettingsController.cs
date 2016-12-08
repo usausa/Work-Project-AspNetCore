@@ -1,6 +1,7 @@
 ﻿namespace WebApplication.Mvc
 {
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Options;
 
     using WebApplication.Settings;
 
@@ -15,9 +16,9 @@
         ///
         /// </summary>
         /// <param name="settings"></param>
-        public SettingsController(SmtpSettings settings)
+        public SettingsController(IOptions<SmtpSettings> settings)
         {
-            Settings = settings;
+            Settings = settings.Value;
         }
 
         /// <summary>

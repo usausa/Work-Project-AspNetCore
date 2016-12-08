@@ -1,5 +1,6 @@
 ﻿namespace WebApplication
 {
+    using System;
     using System.Buffers;
     using System.IO;
 
@@ -7,7 +8,6 @@
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc.Controllers;
     using Microsoft.AspNetCore.Mvc.Formatters;
     using Microsoft.AspNetCore.Mvc.ViewComponents;
@@ -23,15 +23,27 @@
     using Smart.Resolver;
 
     using WebApplication.Infrastructure.Data;
-    using WebApplication.Infrastructure.Resolver;
     using WebApplication.Settings;
 
     /// <summary>
     ///
     /// </summary>
-    public class Startup
+    public class Startup : IDisposable
     {
         private readonly StandardResolver resolver = new StandardResolver();
+
+        /// <summary>
+        ///
+        /// </summary>
+        public IConfigurationRoot Configuration { get; }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public void Dispose()
+        {
+            resolver.Dispose();
+        }
 
         /// <summary>
         ///
@@ -50,13 +62,9 @@
         /// <summary>
         ///
         /// </summary>
-        public IConfigurationRoot Configuration { get; }
-
-        /// <summary>
-        ///
-        /// </summary>
         /// <param name="services"></param>
-        public void ConfigureServices(IServiceCollection services)
+        /// <returns></returns>
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
             services.Configure<RouteOptions>(options =>
@@ -86,17 +94,20 @@
                 options.DescribeAllEnumsAsStrings();    // Enum
             });
 
-            // UseSmartResolverRequestScope need IHttpContextAccessor
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
+            // Replace activator.
             services.AddSingleton<IControllerActivator>(new SmartResolverControllerActivator(resolver));
             services.AddSingleton<IViewComponentActivator>(new SmartResolverViewComponentActivator(resolver));
 
-            services.AddOptions();
+            // Settings
+            ConfigureSettings(services);
 
-            // Setup
-            SetupResolver();
+            // Add application services.
+            SetupComponents();
+
+            // Prepare database
             SetupDatabase();
+
+            return SmartResolverHelper.BuildServiceProvider(resolver, services);
         }
 
         /// <summary>
@@ -109,9 +120,6 @@
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
-            // Enable Smart.Resolver request scope, Placed before UseMvc
-            app.UseSmartResolverRequestScope(resolver);
 
             // Error
             if (env.IsDevelopment())
@@ -143,21 +151,22 @@
             }
         }
 
+        private void ConfigureSettings(IServiceCollection services)
+        {
+            services.AddOptions();
+
+            services.Configure<SmtpSettings>(Configuration.GetSection("SmtpSettings"));
+        }
+
         /// <summary>
         ///
         /// </summary>
-        private void SetupResolver()
+        private void SetupComponents()
         {
             var connectionString = Configuration.GetConnectionString("Test");
             resolver
                 .Bind<IConnectionFactory>()
                 .ToConstant(new CallbackConnectionFactory(() => new SqliteConnection(connectionString)));
-
-            var settings = new SmtpSettings();
-            Configuration.GetSection("SmtpSettings").Bind(settings);
-            resolver
-                .Bind<SmtpSettings>()
-                .ToConstant(settings);
         }
 
         /// <summary>
