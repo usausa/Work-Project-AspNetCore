@@ -7,7 +7,7 @@
     ///
     /// </summary>
     [Route("api/[controller]")]
-    public class ValuesController : Controller
+    public class DataController : Controller
     {
         /// <summary>
         ///

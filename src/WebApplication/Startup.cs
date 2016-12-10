@@ -8,6 +8,7 @@
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Mvc.ApplicationParts;
     using Microsoft.AspNetCore.Mvc.Controllers;
     using Microsoft.AspNetCore.Mvc.Formatters;
     using Microsoft.AspNetCore.Mvc.ViewComponents;
@@ -85,6 +86,14 @@
             // Swagger
             services.AddSwaggerGen(options =>
             {
+                //options.SingleApiVersion(new Info
+                //{
+                //    Version = "v1",
+                //    Title = "Test API",
+                //    Description = "Test ASP.NET Core Web API",
+                //    TermsOfService = "None",
+                //    Contact = new Contact { Name = "うさ☆うさ", Email = "machi.pon@gmail.com" }
+                //});
                 var location = System.Reflection.Assembly.GetEntryAssembly().Location;
                 var xmlPath = location.Replace("dll", "xml");
                 if (File.Exists(xmlPath))
@@ -119,7 +128,7 @@
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+            loggerFactory.AddDebug(LogLevel.Debug);
 
             // Error
             if (env.IsDevelopment())
@@ -149,8 +158,15 @@
                 app.UseSwagger();
                 app.UseSwaggerUi();
             }
+
+            // List controllers
+            EnumControllers(app, loggerFactory.CreateLogger<Startup>());
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="services"></param>
         private void ConfigureSettings(IServiceCollection services)
         {
             services.AddOptions();
@@ -181,6 +197,33 @@
                 con.Execute("DELETE FROM Data");
                 con.Execute("INSERT INTO Data (Id, Name) VALUES (1, 'Data-1')");
                 con.Execute("INSERT INTO Data (Id, Name) VALUES (2, 'Data-2')");
+            }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="logger"></param>
+        private static void EnumControllers(IApplicationBuilder app, ILogger<Startup> logger)
+        {
+            var manager = app.ApplicationServices.GetRequiredService<ApplicationPartManager>();
+
+            var feature = new ControllerFeature();
+            manager.PopulateFeature(feature);
+
+            logger.LogDebug("[Controllers]");
+            foreach (var typeInfo in feature.Controllers)
+            {
+                logger.LogDebug("Controller : Type=[{0}]", typeInfo.AsType());
+            }
+
+            var componentProvider = app.ApplicationServices.GetService<IViewComponentDescriptorProvider>();
+
+            logger.LogDebug("[ViewComponents]");
+            foreach (var viewComponent in componentProvider.GetViewComponents())
+            {
+                logger.LogDebug("ViewComponent : Type=[{0}]", viewComponent.TypeInfo.AsType());
             }
         }
     }
