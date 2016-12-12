@@ -67,6 +67,9 @@
         /// <returns></returns>
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            // Dapper
+            DefaultTypeMap.MatchNamesWithUnderscores = true;
+
             // Add framework services.
             services.Configure<RouteOptions>(options =>
             {
@@ -193,10 +196,10 @@
             var factory = resolver.Get<IConnectionFactory>();
             using (var con = factory.CreateConnection())
             {
-                con.Execute("CREATE TABLE IF NOT EXISTS Data (Id int PRIMARY KEY, Name text)");
-                con.Execute("DELETE FROM Data");
-                con.Execute("INSERT INTO Data (Id, Name) VALUES (1, 'Data-1')");
-                con.Execute("INSERT INTO Data (Id, Name) VALUES (2, 'Data-2')");
+                con.Execute("CREATE TABLE IF NOT EXISTS data (id int PRIMARY KEY, name text, created_at timestamp)");
+                con.Execute("DELETE FROM data");
+                con.Execute("INSERT INTO data (id, name, created_at) VALUES (1, 'Data-1', CURRENT_TIMESTAMP)");
+                con.Execute("INSERT INTO data (id, name, created_at) VALUES (2, 'Data-2', CURRENT_TIMESTAMP)");
             }
         }
 
