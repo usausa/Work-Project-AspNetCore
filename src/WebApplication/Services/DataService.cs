@@ -42,7 +42,7 @@
         public DataEntity QueryData(int id)
         {
             return ConnectionFactory.Using(
-                con => con.Query<DataEntity>("SELECT * FROM data ORDER BY id", buffered: false).FirstOrDefault());
+                con => con.QueryFirstOrDefault<DataEntity>("SELECT * FROM data WHERE id = @id", new { id }));
         }
     }
 }
