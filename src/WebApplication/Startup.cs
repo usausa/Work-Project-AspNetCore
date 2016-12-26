@@ -1,4 +1,6 @@
-﻿namespace WebApplication
+﻿using WebApplication.Infrastructure.Mvc;
+
+namespace WebApplication
 {
     using System;
     using System.Buffers;
@@ -133,6 +135,12 @@
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug(LogLevel.Debug);
 
+            // Debug
+            if (env.IsDevelopment())
+            {
+                app.UseDebug();
+            }
+
             // Error
             if (env.IsDevelopment())
             {
@@ -173,6 +181,8 @@
         private void ConfigureSettings(IServiceCollection services)
         {
             services.AddOptions();
+
+            services.Configure<DebugMiddlewareOptions>(Configuration.GetSection("Debug"));
 
             services.Configure<SmtpSettings>(Configuration.GetSection("SmtpSettings"));
         }
