@@ -1,9 +1,6 @@
-﻿using WebApplication.Infrastructure.Mvc;
-
-namespace WebApplication
+﻿namespace WebApplication
 {
     using System;
-    using System.Buffers;
     using System.IO;
 
     using Dapper;
@@ -12,7 +9,6 @@ namespace WebApplication
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.ApplicationParts;
     using Microsoft.AspNetCore.Mvc.Controllers;
-    using Microsoft.AspNetCore.Mvc.Formatters;
     using Microsoft.AspNetCore.Mvc.ViewComponents;
     using Microsoft.AspNetCore.Routing;
     using Microsoft.Data.Sqlite;
@@ -26,6 +22,7 @@ namespace WebApplication
     using Smart.Resolver;
 
     using WebApplication.Infrastructure.Data;
+    using WebApplication.Infrastructure.Mvc;
     using WebApplication.Settings;
 
     /// <summary>
@@ -78,14 +75,11 @@ namespace WebApplication
                 options.LowercaseUrls = true;
             });
 
-            services.AddMvc(options =>
+            services.AddMvc().AddJsonOptions(option =>
             {
-                options.OutputFormatters.RemoveType<JsonOutputFormatter>();
-                var settings = new JsonSerializerSettings
-                {
-                    ContractResolver = new CamelCasePropertyNamesContractResolver()
-                };
-                options.OutputFormatters.Insert(0, new JsonOutputFormatter(settings, ArrayPool<char>.Shared));
+                option.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                option.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
+                option.SerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
             });
 
             // Swagger
