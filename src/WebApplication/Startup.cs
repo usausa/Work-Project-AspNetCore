@@ -129,6 +129,12 @@
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug(LogLevel.Debug);
 
+            // Profiler
+            if (env.IsDevelopment())
+            {
+                app.UseMiddleware<StackifyMiddleware.RequestTracerMiddleware>();
+            }
+
             // Debug
             if (env.IsDevelopment())
             {

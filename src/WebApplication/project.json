@@ -30,6 +30,7 @@
       "version": "1.0.0",
       "type": "build"
     },
+    "StackifyMiddleware": "2.0.3",
     "Dapper": "1.50.2",
     "Npgsql": "3.1.9",
     "Swashbuckle": "6.0.0-beta902",
