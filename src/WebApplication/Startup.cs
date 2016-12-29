@@ -28,22 +28,12 @@
     /// <summary>
     ///
     /// </summary>
-    public class Startup : IDisposable
+    public class Startup
     {
-        private readonly StandardResolver resolver = new StandardResolver();
-
         /// <summary>
         ///
         /// </summary>
         public IConfigurationRoot Configuration { get; }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public void Dispose()
-        {
-            resolver.Dispose();
-        }
 
         /// <summary>
         ///
@@ -103,19 +93,21 @@
             });
 
             // Replace activator.
-            services.AddSingleton<IControllerActivator>(new SmartResolverControllerActivator(resolver));
-            services.AddSingleton<IViewComponentActivator>(new SmartResolverViewComponentActivator(resolver));
+            services.AddSingleton<IControllerActivator, SmartResolverControllerActivator>();
+            services.AddSingleton<IViewComponentActivator, SmartResolverViewComponentActivator>();
 
             // Settings
             ConfigureSettings(services);
 
             // Add application services.
-            SetupComponents();
+            var config = new ResolverConfig();
+            SetupComponents(config);
+            var provider = SmartResolverHelper.BuildServiceProvider(config, services);
 
             // Prepare database
-            SetupDatabase();
+            SetupDatabase(provider);
 
-            return SmartResolverHelper.BuildServiceProvider(resolver, services);
+            return provider;
         }
 
         /// <summary>
@@ -190,10 +182,10 @@
         /// <summary>
         ///
         /// </summary>
-        private void SetupComponents()
+        private void SetupComponents(ResolverConfig config)
         {
             var connectionString = Configuration.GetConnectionString("Test");
-            resolver
+            config
                 .Bind<IConnectionFactory>()
                 .ToConstant(new CallbackConnectionFactory(() => new SqliteConnection(connectionString)));
         }
@@ -201,9 +193,10 @@
         /// <summary>
         ///
         /// </summary>
-        private void SetupDatabase()
+        /// <param name="provider"></param>
+        private void SetupDatabase(IServiceProvider provider)
         {
-            var factory = resolver.Get<IConnectionFactory>();
+            var factory = (IConnectionFactory)provider.GetService(typeof(IConnectionFactory));
             using (var con = factory.CreateConnection())
             {
                 con.Execute("CREATE TABLE IF NOT EXISTS data (id int PRIMARY KEY, name text, created_at timestamp)");
