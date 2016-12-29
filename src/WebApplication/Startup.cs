@@ -182,6 +182,7 @@
         /// <summary>
         ///
         /// </summary>
+        /// <param name="config"></param>
         private void SetupComponents(ResolverConfig config)
         {
             var connectionString = Configuration.GetConnectionString("Test");
