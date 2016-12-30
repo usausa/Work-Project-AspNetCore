@@ -3,6 +3,8 @@
     using System;
     using System.IO;
 
+    using AutoMapper;
+
     using Dapper;
 
     using Microsoft.AspNetCore.Builder;
@@ -189,6 +191,13 @@
             config
                 .Bind<IConnectionFactory>()
                 .ToConstant(new CallbackConnectionFactory(() => new SqliteConnection(connectionString)));
+
+            config
+                .Bind<IMapper>()
+                .ToConstant(new Mapper(new MapperConfiguration(c =>
+                {
+                    c.AddProfile<ApiMappingProfile>();
+                })));
         }
 
         /// <summary>
