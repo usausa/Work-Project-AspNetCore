@@ -30,6 +30,7 @@
       "version": "1.0.0",
       "type": "build"
     },
+    "Microsoft.AspNetCore.Diagnostics.Elm": "0.2.0",
     "StackifyMiddleware": "2.0.3",
     "Dapper": "1.50.2",
     "Npgsql": "3.1.9",

@@ -74,6 +74,12 @@
                 option.SerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
             });
 
+            // ELM
+            services.AddElm(options =>
+            {
+                options.Filter = (name, lelev) => lelev >= LogLevel.Debug;
+            });
+
             // Swagger
             services.AddSwaggerGen(options =>
             {
@@ -127,6 +133,13 @@
             if (env.IsDevelopment())
             {
                 app.UseMiddleware<StackifyMiddleware.RequestTracerMiddleware>();
+            }
+
+            // ELM
+            if (env.IsDevelopment())
+            {
+                app.UseElmPage();
+                app.UseElmCapture();
             }
 
             // Debug
