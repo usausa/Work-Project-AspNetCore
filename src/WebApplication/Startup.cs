@@ -64,6 +64,7 @@
             // Add framework services.
             services.Configure<RouteOptions>(options =>
             {
+                options.AppendTrailingSlash = true;
                 options.LowercaseUrls = true;
             });
 
