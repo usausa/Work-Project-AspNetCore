@@ -1,4 +1,4 @@
-﻿{
+{
   "dependencies": {
     "Microsoft.NETCore.App": {
       "version": "1.1.0",
@@ -33,10 +33,9 @@
     "Microsoft.AspNetCore.Diagnostics.Elm": "0.2.0",
     "StackifyMiddleware": "2.0.3",
     "Dapper": "1.50.2",
-    "Npgsql": "3.1.9",
     "AutoMapper": "5.2.0",
     "Swashbuckle": "6.0.0-beta902",
-    "Usa.Smart.Core": "0.6.0",
+    "Usa.Smart.Core": "0.6.1",
     "Usa.Smart.Resolver.AspNetCore": "1.2.2"
   },
 
