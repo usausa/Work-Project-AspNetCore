@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.Data", "Smart.Data\Sm
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.AspNetCore", "Smart.AspNetCore\Smart.AspNetCore.csproj", "{B22B51A0-BC1E-46FF-B0A6-5FECA22F8BDF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.Data.SqlClient", "Smart.Data.SqlClient\Smart.Data.SqlClient.csproj", "{8F55B4F2-397A-4CCE-ADC6-815446567F1A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{B22B51A0-BC1E-46FF-B0A6-5FECA22F8BDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B22B51A0-BC1E-46FF-B0A6-5FECA22F8BDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B22B51A0-BC1E-46FF-B0A6-5FECA22F8BDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F55B4F2-397A-4CCE-ADC6-815446567F1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F55B4F2-397A-4CCE-ADC6-815446567F1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F55B4F2-397A-4CCE-ADC6-815446567F1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F55B4F2-397A-4CCE-ADC6-815446567F1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

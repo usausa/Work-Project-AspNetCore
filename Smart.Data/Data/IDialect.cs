@@ -1,4 +1,4 @@
-﻿namespace Assistance.Infrastructure.Data
+﻿namespace Smart.Data
 {
     using System.Data.Common;
 
