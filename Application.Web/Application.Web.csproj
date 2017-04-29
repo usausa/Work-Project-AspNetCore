@@ -22,5 +22,9 @@
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Smart.AspNetCore\Smart.AspNetCore.csproj" />
+    <ProjectReference Include="..\Smart.Data\Smart.Data.csproj" />
+  </ItemGroup>
 
 </Project>
