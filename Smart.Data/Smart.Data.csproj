@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.2</TargetFramework>
     <RootNamespace>Smart</RootNamespace>
+    <CodeAnalysisRuleSet>..\Smart.AspNetCore.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>
