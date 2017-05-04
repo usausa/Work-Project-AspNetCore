@@ -1,7 +1,10 @@
 ﻿namespace Application.Web
 {
+    using System.Text;
+
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Routing;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +15,8 @@
 
     public class Startup
     {
+        private IServiceCollection serviceCollection;
+
         public IConfigurationRoot Configuration { get; }
 
         public Startup(IHostingEnvironment env)
@@ -40,6 +45,8 @@
                     options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
                     options.SerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
                 });
+
+            serviceCollection = services;
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -51,6 +58,47 @@
             {
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
+
+                // for Debug
+                app.Map("/services", builder => builder.Run(async context =>
+                {
+                    var sb = new StringBuilder();
+                    sb.Append("<h1>All Services</h1>");
+                    sb.Append("<table><thead>");
+                    sb.Append("<tr><th>Lifetime</th><th>Create by</th><th>Service Type</th><th>Implement Type</th></tr>");
+                    sb.Append("</thead><tbody>");
+                    foreach (var service in serviceCollection)
+                    {
+                        string createBy;
+                        string implementType;
+                        if (service.ImplementationType != null)
+                        {
+                            createBy = "Type";
+                            implementType = service.ServiceType == service.ImplementationType
+                                ? string.Empty
+                                : service.ImplementationType.FullName;
+                        }
+                        else if (service.ImplementationFactory != null)
+                        {
+                            createBy = "Factory";
+                            implementType = string.Empty;
+                        }
+                        else
+                        {
+                            createBy = "Constant";
+                            implementType = service.ImplementationInstance.GetType().FullName;
+                        }
+
+                        sb.Append("<tr>");
+                        sb.Append($"<td>{service.Lifetime}</td>");
+                        sb.Append($"<td>{createBy}</td>");
+                        sb.Append($"<td>{service.ServiceType.FullName}</td>");
+                        sb.Append($"<td>{implementType}</td>");
+                        sb.Append("</tr>");
+                    }
+                    sb.Append("</tbody></table>");
+                    await context.Response.WriteAsync(sb.ToString());
+                }));
             }
             else
             {
