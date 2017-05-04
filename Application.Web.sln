@@ -27,6 +27,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.Data.SqlClient", "Sma
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Core", "Application.Core\Application.Core.csproj", "{664314A7-2681-4D7C-9E9D-EAC62AC22274}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Smart", "Smart", "{CB07956C-521A-477A-BAC1-E9A56AD5BB08}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{736A5A3E-16B0-4E15-A38B-E56C09FAA224}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,5 +60,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C4F8C7D7-9C25-4247-BE91-E8A3B8C3A486} = {736A5A3E-16B0-4E15-A38B-E56C09FAA224}
+		{C9FDCB7A-CA27-47D0-95D3-688F0750188A} = {CB07956C-521A-477A-BAC1-E9A56AD5BB08}
+		{B22B51A0-BC1E-46FF-B0A6-5FECA22F8BDF} = {CB07956C-521A-477A-BAC1-E9A56AD5BB08}
+		{8F55B4F2-397A-4CCE-ADC6-815446567F1A} = {CB07956C-521A-477A-BAC1-E9A56AD5BB08}
+		{664314A7-2681-4D7C-9E9D-EAC62AC22274} = {736A5A3E-16B0-4E15-A38B-E56C09FAA224}
 	EndGlobalSection
 EndGlobal
