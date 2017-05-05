@@ -1,4 +1,6 @@
-﻿namespace Application.Web
+﻿using Swashbuckle.AspNetCore.Swagger;
+
+namespace Application.Web
 {
     using System.Text;
 
@@ -32,6 +34,8 @@
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.AddOptions();
+
             services.Configure<RouteOptions>(options =>
             {
                 options.AppendTrailingSlash = true;
@@ -52,6 +56,13 @@
                 options.Filter = (name, lelev) => lelev >= LogLevel.Debug;
             });
 
+            // Swagger
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("application", new Info { Title = "Application API", Version = "v1" });
+                options.DescribeAllEnumsAsStrings();    // Enum
+            });
+
             serviceCollection = services;
         }
 
@@ -59,9 +70,6 @@
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
-            app.UseElmPage();
-            app.UseElmCapture();
 
             if (env.IsDevelopment())
             {
@@ -122,6 +130,15 @@
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            //if (env.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI(options =>
+                {
+                    options.SwaggerEndpoint("/swagger/application/swagger.json", "Application API");
+                });
+            }
         }
     }
 }
