@@ -46,6 +46,12 @@
                     options.SerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
                 });
 
+            // ELM
+            services.AddElm(options =>
+            {
+                options.Filter = (name, lelev) => lelev >= LogLevel.Debug;
+            });
+
             serviceCollection = services;
         }
 
@@ -53,6 +59,9 @@
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            app.UseElmPage();
+            app.UseElmCapture();
 
             if (env.IsDevelopment())
             {
