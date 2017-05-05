@@ -1,6 +1,4 @@
-﻿using Swashbuckle.AspNetCore.Swagger;
-
-namespace Application.Web
+﻿namespace Application.Web
 {
     using System.Text;
 
@@ -14,6 +12,11 @@ namespace Application.Web
 
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
+
+    using NLog.Extensions.Logging;
+    using NLog.Web;
+
+    using Swashbuckle.AspNetCore.Swagger;
 
     public class Startup
     {
@@ -70,6 +73,9 @@ namespace Application.Web
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+            loggerFactory.AddNLog();
+
+            app.AddNLogWeb();
 
             if (env.IsDevelopment())
             {
