@@ -79,6 +79,12 @@
 
             if (env.IsDevelopment())
             {
+                app.UseElmPage();
+                app.UseElmCapture();
+            }
+
+            if (env.IsDevelopment())
+            {
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
 
