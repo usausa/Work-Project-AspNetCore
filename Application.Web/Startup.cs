@@ -38,6 +38,7 @@
         {
             // Add framework services.
             services.AddOptions();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.Configure<RouteOptions>(options =>
             {
