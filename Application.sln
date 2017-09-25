@@ -8,15 +8,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
-		Application.Web.sln.DotSettings = Application.Web.sln.DotSettings
+		Application.sln.DotSettings = Application.sln.DotSettings
 		Database.Data.sql = Database.Data.sql
 		Database.sql = Database.sql
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Web", "Application.Web\Application.Web.csproj", "{505BC78D-B65E-4DA3-883A-BDDE0CAA2A93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Web", "Application.Web\Application.Web.csproj", "{505BC78D-B65E-4DA3-883A-BDDE0CAA2A93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Core", "Application.Core\Application.Core.csproj", "{99626D08-A8B0-409D-82A6-2265DE740FFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Core", "Application.Core\Application.Core.csproj", "{99626D08-A8B0-409D-82A6-2265DE740FFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
