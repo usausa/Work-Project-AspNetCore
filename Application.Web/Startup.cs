@@ -1,3 +1,7 @@
+using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
+using NLog.Web;
+
 namespace Application.Web
 {
     using Microsoft.AspNetCore.Builder;
@@ -14,13 +18,11 @@ namespace Application.Web
     {
         public IConfiguration Configuration { get; }
 
-        public Startup(IConfiguration configuration, IApplicationLifetime lifetime)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
 
-            lifetime.ApplicationStarted.Register(OnStarted);
-            lifetime.ApplicationStopping.Register(OnStopping);
-            lifetime.ApplicationStopped.Register(OnStopped);
+            env.ConfigureNLog("nlog.config");
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -45,8 +47,16 @@ namespace Application.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime lifetime, ILoggerFactory loggerFactory)
         {
+            lifetime.ApplicationStarted.Register(OnStarted);
+            lifetime.ApplicationStopping.Register(OnStopping);
+            lifetime.ApplicationStopped.Register(OnStopped);
+
+            loggerFactory.AddNLog();
+
+            app.AddNLogWeb();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

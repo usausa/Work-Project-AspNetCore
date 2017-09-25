@@ -1,3 +1,5 @@
+using Microsoft.ApplicationInsights.Extensibility;
+
 namespace Application.Web
 {
     using System.IO;
@@ -10,6 +12,9 @@ namespace Application.Web
     {
         public static void Main(string[] args)
         {
+            // Disable ApplicationInsight
+            TelemetryConfiguration.Active.DisableTelemetry = true;
+
             BuildWebHost(args).Run();
         }
 
