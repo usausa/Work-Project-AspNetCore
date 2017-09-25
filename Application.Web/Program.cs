@@ -1,9 +1,8 @@
-using Microsoft.ApplicationInsights.Extensibility;
-
 namespace Application.Web
 {
     using System.IO;
 
+    using Microsoft.ApplicationInsights.Extensibility;
     using Microsoft.AspNetCore;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
