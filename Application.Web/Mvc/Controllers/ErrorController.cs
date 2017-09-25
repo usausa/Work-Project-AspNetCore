@@ -2,8 +2,8 @@ namespace Application.Web.Mvc.Controllers
 {
     using System.Diagnostics;
 
-    using Application.Web.Models;
     using Application.Web.Mvc.Infrastructure;
+    using Application.Web.Mvc.Models;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
