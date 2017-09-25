@@ -1,14 +1,14 @@
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-
 namespace Application.Web
 {
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Routing;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Serialization;
 
     public class Startup
     {
