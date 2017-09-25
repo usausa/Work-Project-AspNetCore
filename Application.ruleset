@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="WebApplication Rules" Description="WebApplication Rules" ToolsVersion="14.0">
+<RuleSet Name="Application Rules" Description="Application Rules" ToolsVersion="14.0">
   <IncludeAll Action="Warning" />
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
     <Rule Id="CA2210" Action="None" />
