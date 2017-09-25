@@ -44,6 +44,13 @@ namespace Application.Web
                     options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
                     options.SerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
                 });
+
+            // ELM
+            services.AddElm(options =>
+            {
+                options.Path = new PathString("/elm");
+                options.Filter = (name, lelev) => lelev >= LogLevel.Trace;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +63,13 @@ namespace Application.Web
             loggerFactory.AddNLog();
 
             app.AddNLogWeb();
+
+            // ELM
+            if (env.IsDevelopment())
+            {
+                app.UseElmPage();
+                app.UseElmCapture();
+            }
 
             if (env.IsDevelopment())
             {
