@@ -14,9 +14,13 @@ namespace Application.Web
     {
         public IConfiguration Configuration { get; }
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IApplicationLifetime lifetime)
         {
             Configuration = configuration;
+
+            lifetime.ApplicationStarted.Register(OnStarted);
+            lifetime.ApplicationStopping.Register(OnStopping);
+            lifetime.ApplicationStopped.Register(OnStopped);
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -61,6 +65,21 @@ namespace Application.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        private void OnStarted()
+        {
+            // Perform post-startup activities here
+        }
+
+        private void OnStopping()
+        {
+            // Perform on-stopping activities here
+        }
+
+        private void OnStopped()
+        {
+            // Perform post-stopped activities here
         }
     }
 }
