@@ -1,3 +1,8 @@
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+
 namespace Application.Web
 {
     using Microsoft.AspNetCore.Builder;
@@ -7,17 +12,32 @@ namespace Application.Web
 
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            // Add framework services.
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.Configure<RouteOptions>(options =>
+            {
+                options.AppendTrailingSlash = true;
+                options.LowercaseUrls = true;
+            });
+
+            services.AddMvc()
+                .AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                    options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
+                    options.SerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
