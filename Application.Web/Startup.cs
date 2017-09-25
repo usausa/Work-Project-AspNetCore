@@ -16,6 +16,8 @@ namespace Application.Web
     using NLog.Extensions.Logging;
     using NLog.Web;
 
+    using Swashbuckle.AspNetCore.Swagger;
+
     public class Startup
     {
         public IConfiguration Configuration { get; }
@@ -55,6 +57,15 @@ namespace Application.Web
                 options.Path = new PathString("/elm");
                 options.Filter = (name, lelev) => lelev >= LogLevel.Trace;
             });
+
+            // Swagger
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("application", new Info { Title = "Application API", Version = "v1" });
+                options.DescribeAllEnumsAsStrings();    // Enum
+            });
+
+            serviceCollection = services;
 
             serviceCollection = services;
         }
@@ -101,9 +112,19 @@ namespace Application.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            // Swagger
+            //if (env.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI(options =>
+                {
+                    options.SwaggerEndpoint("/swagger/application/swagger.json", "Application API");
+                });
+            }
         }
 
-        private void UseServices(IApplicationBuilder app)
+    private void UseServices(IApplicationBuilder app)
         {
             app.Map("/services", builder => builder.Run(async context =>
             {
