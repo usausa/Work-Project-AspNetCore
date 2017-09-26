@@ -1,12 +1,12 @@
-﻿namespace Application.Web.Api.Controllers
+namespace Application.Web.Api.Controllers
 {
     using System.Collections.Generic;
 
+    using Application.Web.Api.Infrastructure;
+
     using Microsoft.AspNetCore.Mvc;
 
-    [Area("api")]
-    [Route("api/[controller]")]
-    public class ValuesController : Controller
+    public class ValuesController : BaseApiController
     {
         [HttpGet]
         public IEnumerable<string> Get()

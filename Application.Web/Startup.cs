@@ -2,6 +2,12 @@ namespace Application.Web
 {
     using System.Text;
 
+    using Application.Components.Serializer;
+    using Application.Web.Api;
+    using Application.Web.Mvc;
+
+    using AutoMapper;
+
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -34,6 +40,8 @@ namespace Application.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            serviceCollection = services;
+
             // Add framework services.
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -63,9 +71,44 @@ namespace Application.Web
             {
                 options.SwaggerDoc("application", new Info { Title = "Application API", Version = "v1" });
                 options.DescribeAllEnumsAsStrings();    // Enum
+                // TODO additional?
             });
 
-            serviceCollection = services;
+            // Settings
+            // TODO
+
+            // Components
+
+            // Data
+            // TODO
+
+            // Security
+            // TODO
+
+            // Serializer
+            services.AddSingleton<IStringSerializer, JsonStringSerializer>();
+
+            // Mail
+            // TODO
+
+            // Report
+            // TODO
+
+            // Image
+            // TODO
+
+            // View
+            // TODO(SelectListBuilder, API Token?)
+
+            // Mapper
+            services.AddSingleton<IMapper>(new Mapper(new MapperConfiguration(c =>
+            {
+                c.AddProfile<MvcMappingProfile>();
+                c.AddProfile<ApiMappingProfile>();
+            })));
+
+            // Services
+            // TODO
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -122,7 +165,7 @@ namespace Application.Web
             }
         }
 
-    private void UseServices(IApplicationBuilder app)
+        private void UseServices(IApplicationBuilder app)
         {
             app.Map("/services", builder => builder.Run(async context =>
             {
