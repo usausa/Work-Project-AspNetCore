@@ -22,6 +22,8 @@ namespace Application.Web
     using NLog.Extensions.Logging;
     using NLog.Web;
 
+    using Smart.AspNetCore.Filters;
+
     using Swashbuckle.AspNetCore.Swagger;
 
     public class Startup
@@ -51,7 +53,18 @@ namespace Application.Web
                 options.LowercaseUrls = true;
             });
 
-            services.AddMvc()
+            services.AddExceptionLogging();
+            services.AddTimeLogging(options =>
+            {
+                options.Thresold = 5000;
+            });
+
+            services
+                .AddMvc(options =>
+                {
+                    options.Filters.AddExceptionLogging();
+                    options.Filters.AddTimeLogging();
+                })
                 .AddJsonOptions(options =>
                 {
                     options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
