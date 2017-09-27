@@ -16,7 +16,7 @@
     <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="1.0.0" />
     <PackageReference Include="Usa.Smart.AspNetCore" Version="1.0.0" />
-    <PackageReference Include="Usa.Smart.Core" Version="1.0.1" />
+    <PackageReference Include="Usa.Smart.Core" Version="1.0.3" />
   </ItemGroup>
 
   <ItemGroup>
