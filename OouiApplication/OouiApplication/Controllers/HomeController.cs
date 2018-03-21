@@ -1,32 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using OouiApplication.Models;
-
-namespace OouiApplication.Controllers
+﻿namespace OouiApplication.Controllers
 {
+    using System.Diagnostics;
+
+    using Microsoft.AspNetCore.Mvc;
+
+    using Ooui.AspNetCore;
+    using OouiApplication.Models;
+    using OouiApplication.Pages;
+
+    using Xamarin.Forms;
+
     public class HomeController : Controller
     {
         public IActionResult Index()
         {
-            return View();
-        }
-
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
+            var page = new HomePage();
+            var element = page.GetOouiElement();
+            return new ElementResult(element, "Home page");
         }
 
         public IActionResult Error()
