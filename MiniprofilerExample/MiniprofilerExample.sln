@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniprofilerExample", "MiniprofilerExample\MiniprofilerExample.csproj", "{A430207C-CAF3-4CD9-B7B3-4037D183B5DC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A430207C-CAF3-4CD9-B7B3-4037D183B5DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A430207C-CAF3-4CD9-B7B3-4037D183B5DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A430207C-CAF3-4CD9-B7B3-4037D183B5DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A430207C-CAF3-4CD9-B7B3-4037D183B5DC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {34E576EA-1DCC-45A7-BB31-666DC7F7ADDC}
+	EndGlobalSection
+EndGlobal
