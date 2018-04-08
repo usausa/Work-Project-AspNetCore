@@ -1,5 +1,3 @@
-using System;
-
 namespace OouiExample.Models
 {
     public class ErrorViewModel
