@@ -9,6 +9,7 @@
     <PackageReference Include="Ooui" Version="0.10.222" />
     <PackageReference Include="Ooui.AspNetCore" Version="0.10.222" />
     <PackageReference Include="Ooui.Forms" Version="0.10.222" />
+    <PackageReference Include="Usa.Smart.AspNetCore" Version="1.0.1" />
     <PackageReference Include="Usa.Smart.Core" Version="1.5.3" />
     <PackageReference Include="Usa.Smart.Forms" Version="1.1.5" />
     <PackageReference Include="Xamarin.Forms" Version="2.5.1.444934" />
