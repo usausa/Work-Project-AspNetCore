@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OouiExample", "OouiExample\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoapExample", "SoapExample\SoapExample\SoapExample.csproj", "{9B2FF419-31A9-4C7E-8737-C63C2FA9EDB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogExample", "LogExample\LogExample.csproj", "{D172B7AB-60A2-4622-9517-D130242E5D63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogExample", "LogExample\LogExample\LogExample.csproj", "{3405BEFE-7C34-4F7E-BD4A-998EFD4C4A06}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{9B2FF419-31A9-4C7E-8737-C63C2FA9EDB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B2FF419-31A9-4C7E-8737-C63C2FA9EDB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B2FF419-31A9-4C7E-8737-C63C2FA9EDB2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D172B7AB-60A2-4622-9517-D130242E5D63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D172B7AB-60A2-4622-9517-D130242E5D63}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D172B7AB-60A2-4622-9517-D130242E5D63}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D172B7AB-60A2-4622-9517-D130242E5D63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3405BEFE-7C34-4F7E-BD4A-998EFD4C4A06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3405BEFE-7C34-4F7E-BD4A-998EFD4C4A06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3405BEFE-7C34-4F7E-BD4A-998EFD4C4A06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3405BEFE-7C34-4F7E-BD4A-998EFD4C4A06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
