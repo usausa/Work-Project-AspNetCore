@@ -1,17 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using MiniprofilerExample.Models;
-
-namespace MiniprofilerExample.Controllers
+﻿namespace MiniprofilerExample.Controllers
 {
+    using System.Diagnostics;
+    using System.Threading;
+
+    using Dapper;
+
+    using Microsoft.AspNetCore.Mvc;
+
+    using MiniprofilerExample.Models;
+
+    using Smart.Data;
+    using StackExchange.Profiling;
+
     public class HomeController : Controller
     {
+        private IConnectionFactory ConnectionFactory { get; }
+
+        public HomeController(IConnectionFactory connectionFactory)
+        {
+            ConnectionFactory = connectionFactory;
+        }
+
         public IActionResult Index()
         {
+            ConnectionFactory.Using(con => con.ExecuteScalar<int>("SELECT COUNT(*) FROM Data"));
+
+            using (MiniProfiler.Current.Step("Example Step"))
+            {
+                Thread.Sleep(10);
+
+                using (MiniProfiler.Current.Step("Sub timing"))
+                {
+                    Thread.Sleep(5);
+                }
+
+                using (MiniProfiler.Current.Step("Sub timing 2"))
+                {
+                    Thread.Sleep(5);
+                }
+            }
+
             return View();
         }
 

@@ -5,9 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="1.50.4" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.7" />
+    <PackageReference Include="MiniProfiler.AspNetCore.Mvc" Version="4.0.0-beta.50" />
     <PackageReference Include="Usa.Smart.AspNetCore" Version="1.0.1" />
     <PackageReference Include="Usa.Smart.Core" Version="1.5.3" />
+    <PackageReference Include="Usa.Smart.Data" Version="0.0.3" />
   </ItemGroup>
 
   <ItemGroup>
