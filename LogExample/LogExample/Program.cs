@@ -3,16 +3,17 @@
     using Microsoft.AspNetCore;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Logging;
+
     using NLog.Web;
 
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            CreateWebHostBuilder(args).Build().Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .ConfigureLogging(logging =>
@@ -21,7 +22,6 @@
                     logging.SetMinimumLevel(LogLevel.Information);
 
                 })
-                .UseNLog()
-                .Build();
+                .UseNLog();
     }
 }

@@ -1,5 +1,3 @@
-using System;
-
 namespace LogExample.Models
 {
     public class ErrorViewModel
