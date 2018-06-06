@@ -1,5 +1,3 @@
-using System;
-
 namespace MiniprofilerExample.Models
 {
     public class ErrorViewModel

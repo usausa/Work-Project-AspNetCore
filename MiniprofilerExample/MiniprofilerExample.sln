@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27428.2027
+VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniprofilerExample", "MiniprofilerExample\MiniprofilerExample.csproj", "{A430207C-CAF3-4CD9-B7B3-4037D183B5DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniprofilerExample", "MiniprofilerExample\MiniprofilerExample.csproj", "{1A9B7664-AF61-46B8-A25D-4CBE293EA8EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A430207C-CAF3-4CD9-B7B3-4037D183B5DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A430207C-CAF3-4CD9-B7B3-4037D183B5DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A430207C-CAF3-4CD9-B7B3-4037D183B5DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A430207C-CAF3-4CD9-B7B3-4037D183B5DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A9B7664-AF61-46B8-A25D-4CBE293EA8EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A9B7664-AF61-46B8-A25D-4CBE293EA8EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A9B7664-AF61-46B8-A25D-4CBE293EA8EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A9B7664-AF61-46B8-A25D-4CBE293EA8EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {34E576EA-1DCC-45A7-BB31-666DC7F7ADDC}
+		SolutionGuid = {D3F4E793-A7A1-4312-B33A-9654951E168C}
 	EndGlobalSection
 EndGlobal

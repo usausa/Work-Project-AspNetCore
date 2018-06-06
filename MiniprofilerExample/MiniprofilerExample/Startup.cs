@@ -1,21 +1,24 @@
-﻿using Dapper;
-using Microsoft.Data.Sqlite;
-using Smart.Data;
-using StackExchange.Profiling;
-using StackExchange.Profiling.Data;
-
-namespace MiniprofilerExample
+﻿namespace MiniprofilerExample
 {
+    using Dapper;
+
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Data.Sqlite;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
+    using Smart.Data;
+
+    using StackExchange.Profiling;
+    using StackExchange.Profiling.Data;
+
     public class Startup
     {
-        private readonly IHostingEnvironment env;
-
         public IConfiguration Configuration { get; }
+
+        private readonly IHostingEnvironment env;
 
         public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
@@ -26,7 +29,7 @@ namespace MiniprofilerExample
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddMiniProfiler(options =>
             {
@@ -72,7 +75,6 @@ namespace MiniprofilerExample
         {
             if (env.IsDevelopment())
             {
-                app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
             }
             else
