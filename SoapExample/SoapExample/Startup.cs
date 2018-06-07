@@ -1,16 +1,14 @@
-﻿namespace SoapExample
+﻿using System.ServiceModel;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using SoapCore;
+using SoapExample.WebServices;
+
+namespace SoapExample
 {
-    using System.ServiceModel;
-
-    using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-
-    using SoapCore;
-
-    using SoapExample.WebServices;
-
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -23,7 +21,7 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddSingleton<SampleService>();
         }
@@ -33,7 +31,6 @@
         {
             if (env.IsDevelopment())
             {
-                app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
             }
             else

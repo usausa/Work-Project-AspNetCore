@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using SoapExample.Models;
-
-namespace SoapExample.WebServices
+﻿namespace SoapExample.WebServices
 {
     using System.ServiceModel;
+    using System.Threading.Tasks;
+
+    using SoapExample.Models;
 
     [ServiceContract]
     public class SampleService

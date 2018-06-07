@@ -1,5 +1,3 @@
-using System;
-
 namespace SoapExample.Models
 {
     public class ErrorViewModel
