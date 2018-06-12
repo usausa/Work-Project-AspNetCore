@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using AreaExample.Areas.Default.Models;
-
-namespace AreaExample.Areas.Default
+﻿namespace AreaExample.Areas.Default.Controllers
 {
+    using System.Diagnostics;
+
+    using AreaExample.Areas.Default.Models;
+
+    using Microsoft.AspNetCore.Mvc;
+
     [Area("Default")]
     public class HomeController : Controller
     {

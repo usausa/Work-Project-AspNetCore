@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetCore.RouteAnalyzer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -24,6 +25,8 @@ namespace AreaExample
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddRouteAnalyzer();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,14 +45,25 @@ namespace AreaExample
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action}/{id?}",
-                    defaults: new { Area = "Default", Controller = "Home", Action = "Index" });
+                routes.MapRouteAnalyzer("/routes");
 
                 routes.MapRoute(
-                    name: "area",
-                    template: "{area:exists}/{controller}/{action=Index}/{id?}");
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}",
+                    defaults: new { area = "Default" });
+
+                routes.MapAreaRoute(
+                    name: "Api",
+                    areaName: "Api",
+                    template: "Api/{controller=Home}/{action=Index}/{id?}");
+                routes.MapAreaRoute(
+                    name: "SubSystem1",
+                    areaName: "SubSystem1",
+                    template: "SubSystem1/{controller=Home}/{action=Index}/{id?}");
+                routes.MapAreaRoute(
+                    name: "SubSystem2",
+                    areaName: "SubSystem2",
+                    template: "SubSystem2/{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
