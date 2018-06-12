@@ -1,6 +1,4 @@
-using System;
-
-namespace AreaExample.Models
+namespace AreaExample.Areas.Default.Models
 {
     public class ErrorViewModel
     {

@@ -4,10 +4,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using AreaExample.Models;
+using AreaExample.Areas.Default.Models;
 
-namespace AreaExample.Areas
+namespace AreaExample.Areas.Default
 {
+    [Area("Default")]
     public class HomeController : Controller
     {
         public IActionResult Index()

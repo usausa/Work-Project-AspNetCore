@@ -43,12 +43,13 @@ namespace AreaExample
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "area",
-                    template: "{area:exists}/{controller}/{action=Index}/{id?}");
+                    name: "default",
+                    template: "{controller}/{action}/{id?}",
+                    defaults: new { Area = "Default", Controller = "Home", Action = "Index" });
 
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    name: "area",
+                    template: "{area:exists}/{controller}/{action=Index}/{id?}");
             });
         }
     }
