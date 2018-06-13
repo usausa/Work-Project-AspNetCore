@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AspNetCore.RouteAnalyzer;
+﻿using AspNetCore.RouteAnalyzer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -24,6 +20,12 @@ namespace AreaExample
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<RouteOptions>(options =>
+            {
+                options.AppendTrailingSlash = true;
+                options.LowercaseUrls = true;
+            });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddRouteAnalyzer();
@@ -47,11 +49,10 @@ namespace AreaExample
             {
                 routes.MapRouteAnalyzer("/routes");
 
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}",
-                    defaults: new { area = "Default" });
-
+                routes.MapAreaRoute(
+                    name: "Default",
+                    areaName: "Default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
                 routes.MapAreaRoute(
                     name: "Api",
                     areaName: "Api",
