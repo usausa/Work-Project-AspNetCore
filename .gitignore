@@ -255,3 +255,4 @@ paket-files/
 desktop.ini
 __*
 *.db
+/SignalRExample/SignalRExample/package-lock.json

@@ -1,0 +1,82 @@
+﻿@{
+    ViewData["Title"] = "Chat Page";
+}
+
+<h1>Chat</h1>
+
+<form action="#">
+    <input type="text" id="message-text" disabled />
+    <button type="submit" id="send-button" disabled >Send</button>
+</form>
+
+<ul id="message-list"></ul>
+
+@section Scripts {
+    <script src="/lib/signalr/signalr.js"></script>
+    <script type="text/javascript">
+        var messageText = $('#message-text');
+        var sendButton = $('#send-button');
+        var messageList = $('#message-list');
+
+        function appendMessage(message) {
+            messageList.prepend('<li>' + message + '</li>');
+        }
+
+        var connection = new signalR.HubConnectionBuilder()
+            .withUrl('/hubs/chat')
+            .configureLogging(signalR.LogLevel.Information)
+            .build();
+
+        function reconnect() {
+            setTimeout(function() {
+                connection.start()
+                    .then(function() {
+                        console.log('connection restarted.');
+                    })
+                    .catch(function(ex) {
+                        console.log('connection restart error. ' + ex.toString());
+                        reconnect();
+                    });
+            }, 5000);
+        }
+
+        connection.onclose(function (error) {
+            console.error(error.toString());
+            appendMessage('Close');
+            reconnect();
+        });
+
+        connection.on('Connected', function(id) {
+            appendMessage('Connected ' + id);
+        });
+
+        connection.on('Disconnected', function(id) {
+            appendMessage('Disconnected ' + id);
+        });
+
+        connection.on('Message', function(id, message) {
+            appendMessage('Message ' + id + ' :' + message);
+        });
+
+        connection.start()
+            .then(function() {
+                console.log('connection started.');
+                messageText.prop('disabled', false);
+                sendButton.prop('disabled', false);
+            })
+            .catch(function (ex) {
+                console.log('connection start error. ' + ex.toString());
+                reconnect();
+            });
+
+        sendButton.on('click', function () {
+            var message = messageText.val();
+            if (message === '') {
+                return false;
+            }
+            messageText.val('');
+            connection.invoke('Send', message);
+            return false;
+        });
+    </script>
+}
