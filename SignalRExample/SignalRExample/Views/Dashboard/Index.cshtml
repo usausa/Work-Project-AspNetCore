@@ -1,0 +1,62 @@
+﻿@model DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard Page";
+}
+
+<h1>Dashboard</h1>
+
+<div>
+    <span id="counter">@Model.Counter</span>
+</div>
+
+@section Scripts {
+    <script src="/lib/signalr/signalr.js"></script>
+    <script type="text/javascript">
+        var counter = $('#counter');
+
+        var connection = new signalR.HubConnectionBuilder()
+            .withUrl('/hubs/dashboard')
+            .configureLogging(signalR.LogLevel.Information)
+            .build();
+
+        function reconnect() {
+            setTimeout(function() {
+                connection.start()
+                    .then(function() {
+                        console.log('connection restarted.');
+                    })
+                    .catch(function(ex) {
+                        console.log('connection restart error. ' + ex.toString());
+                        reconnect();
+                    });
+            }, 5000);
+        }
+
+        connection.onclose(function (error) {
+            console.error(error.toString());
+            reconnect();
+        });
+
+        connection.on('Update', function () {
+            console.log('updated.');
+
+            connection.invoke("Query")
+                .then(function(ret) {
+                    counter.text(ret);
+                })
+                .catch(function(ex) {
+                    console.log('connection restart error. ' + ex.toString());
+                    reconnect();
+                });
+        });
+
+        connection.start()
+            .then(function() {
+                console.log('connection started.');
+            })
+            .catch(function (ex) {
+                console.log('connection start error. ' + ex.toString());
+                reconnect();
+            });
+    </script>
+}

@@ -1,15 +1,27 @@
-﻿namespace SignalRExample.Controllers
+﻿using System.Threading.Tasks;
+
+namespace SignalRExample.Controllers
 {
     using System.Diagnostics;
 
     using Microsoft.AspNetCore.Mvc;
 
     using SignalRExample.Models;
+    using SignalRExample.Services;
 
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public CounterService CounterService { get; }
+
+        public HomeController(CounterService counterService)
         {
+            CounterService = counterService;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            await CounterService.Increment();
+
             return View();
         }
 

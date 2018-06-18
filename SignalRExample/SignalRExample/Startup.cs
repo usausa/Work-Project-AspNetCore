@@ -11,6 +11,7 @@
     using Microsoft.Extensions.DependencyInjection;
 
     using SignalRExample.Hubs;
+    using SignalRExample.Services;
 
     public class Startup
     {
@@ -37,6 +38,9 @@
                     options.LoginPath = new PathString("/account/login");
                     options.LogoutPath = new PathString("/account/logout");
                 });
+
+            services.AddSingleton<CounterService>();
+            services.AddSingleton<ICounterNotifier, DashboardNotifier>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,6 +69,7 @@
             app.UseSignalR(routes =>
             {
                 routes.MapHub<ChatHub>("/hubs/chat");
+                routes.MapHub<DashboardHub>("/hubs/dashboard");
             });
         }
     }
