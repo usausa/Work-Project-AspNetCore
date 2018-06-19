@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="SoapCore" Version="0.9.7" />
+    <PackageReference Include="SoapCore" Version="0.9.8" />
     <PackageReference Include="Usa.Smart.AspNetCore" Version="1.1.0" />
     <PackageReference Include="Usa.Smart.Core" Version="1.5.7" />
   </ItemGroup>
