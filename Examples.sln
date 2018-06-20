@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRExample", "SignalREx
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkiaSharpPdfExample", "SkiaSharpPdfExample\SkiaSharpPdfExample\SkiaSharpPdfExample.csproj", "{A97167D3-3D28-4C76-80F8-9ADAD947AD52}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PdfSharpExample", "PdfSharpExample\PdfSharpExample\PdfSharpExample.csproj", "{D4ECA831-4684-4E1A-995F-D7FC631CB012}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{A97167D3-3D28-4C76-80F8-9ADAD947AD52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A97167D3-3D28-4C76-80F8-9ADAD947AD52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A97167D3-3D28-4C76-80F8-9ADAD947AD52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4ECA831-4684-4E1A-995F-D7FC631CB012}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4ECA831-4684-4E1A-995F-D7FC631CB012}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4ECA831-4684-4E1A-995F-D7FC631CB012}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4ECA831-4684-4E1A-995F-D7FC631CB012}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
