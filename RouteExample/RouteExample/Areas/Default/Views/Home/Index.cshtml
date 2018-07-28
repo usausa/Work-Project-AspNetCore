@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Default Home";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<ul>
+    <li><a asp-area="Default" asp-controller="Home" asp-action="Index">Default-Home-Index (Default)</a></li>
+    <li><a asp-area="Default" asp-controller="Home" asp-action="About">Default-Home-About</a></li>
+    <li><a asp-area="Default" asp-controller="Data" asp-action="Index">Default-Data-Index (Controller default)</a></li>
+    <li><a asp-area="Default" asp-controller="Data" asp-action="Edit" asp-route-id="1">Default-Data-Edit-1</a></li>
+    <li><a asp-area="Default" asp-controller="Data" asp-action="Date">Default-Data-Date</a></li>
+    <li><a asp-area="Default" asp-controller="Data" asp-action="Date" asp-route-year="2000">Default-Data-Date-2000</a></li>
+    <li><a asp-area="Default" asp-controller="Data" asp-action="Date" asp-route-year="2000" asp-route-month="12">Default-Data-Date-2000-12</a></li>
+    <li><a asp-area="Default" asp-controller="Data" asp-action="Date" asp-route-year="2000" asp-route-month="12" asp-route-day="31">Default-Data-Date-2000-12-31</a></li>
+</ul>
+<ul>
+    <li><a asp-area="SubArea1" asp-controller="Home" asp-action="Index">SubArea1-Home-Index (Area default)</a></li>
+    <li><a asp-area="SubArea1" asp-controller="Data" asp-action="Index">SubArea1-Data-Index (Controller default of area)</a></li>
+    <li><a asp-area="SubArea1" asp-controller="Data" asp-action="Edit" asp-route-id="1">SubArea1-Data-Edit-1</a></li>
+    <li><a asp-area="SubArea1" asp-controller="Data" asp-action="Date">SubArea1-Data-Date</a></li>
+    <li><a asp-area="SubArea1" asp-controller="Data" asp-action="Date" asp-route-year="2000">SubArea1-Data-Date-2000</a></li>
+    <li><a asp-area="SubArea1" asp-controller="Data" asp-action="Date" asp-route-year="2000" asp-route-month="12">SubArea1-Data-Date-2000-12</a></li>
+    <li><a asp-area="SubArea1" asp-controller="Data" asp-action="Date" asp-route-year="2000" asp-route-month="12" asp-route-day="31">SubArea1-Data-Date-2000-12-31</a></li>
+</ul>
+<ul>
+    <li><a asp-area="SubArea2" asp-controller="Home" asp-action="Index">SubArea2-Home-Index (Area default)</a></li>
+    <li><a asp-area="SubArea2" asp-controller="Data" asp-action="Index">Default-Data-Index (Controller default of area)</a></li>
+    <li><a asp-area="SubArea2" asp-controller="Data" asp-action="Edit" asp-route-id="1">SubArea2-Data-Edit-1</a></li>
+    <li><a asp-area="SubArea2" asp-controller="Data" asp-action="Date">SubArea2-Data-Date</a></li>
+    <li><a asp-area="SubArea2" asp-controller="Data" asp-action="Date" asp-route-year="2000">SubArea2-Data-Date-2000</a></li>
+    <li><a asp-area="SubArea2" asp-controller="Data" asp-action="Date" asp-route-year="2000" asp-route-month="12">SubArea2-Data-Date-2000-12</a></li>
+    <li><a asp-area="SubArea2" asp-controller="Data" asp-action="Date" asp-route-year="2000" asp-route-month="12" asp-route-day="31">SubArea2-Data-Date-2000-12-31</a></li>
+</ul>
