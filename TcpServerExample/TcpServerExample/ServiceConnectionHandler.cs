@@ -10,16 +10,22 @@ namespace TcpServerExample
     {
         private ILogger<ServiceConnectionHandler> Log { get; }
 
-        public ServiceConnectionHandler(ILogger<ServiceConnectionHandler> log)
+        private Counter Counter { get; }
+
+        public ServiceConnectionHandler(
+            ILogger<ServiceConnectionHandler> log,
+            Counter counter)
         {
             Log = log;
+            Counter = counter;
         }
 
         public override async Task OnConnectedAsync(ConnectionContext connection)
         {
             try
             {
-                Log.LogInformation($"Connection start. id=[{connection.ConnectionId}]");
+                var count = Counter.IncrementAndGet();
+                Log.LogInformation($"Connection start. id=[{connection.ConnectionId}], count=[{count}]");
 
                 var cts = new CancellationTokenSource();
                 while (true)

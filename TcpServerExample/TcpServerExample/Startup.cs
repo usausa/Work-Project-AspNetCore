@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-namespace TcpServerExample
+﻿namespace TcpServerExample
 {
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -10,6 +8,7 @@ namespace TcpServerExample
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<Counter>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
