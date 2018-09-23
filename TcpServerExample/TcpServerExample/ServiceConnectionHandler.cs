@@ -19,7 +19,7 @@ namespace TcpServerExample
         {
             try
             {
-                Log.LogInformation($"Connection start. id=[{connection.ConnectionId}], thread=[{Thread.CurrentThread.ManagedThreadId}] ");
+                Log.LogInformation($"Connection start. id=[{connection.ConnectionId}]");
 
                 var cts = new CancellationTokenSource();
                 while (true)
@@ -27,6 +27,8 @@ namespace TcpServerExample
                     cts.CancelAfter(5000);
                     var result = await connection.Transport.Input.ReadAsync(cts.Token);
                     var buffer = result.Buffer;
+
+                    Log.LogInformation($"Connection read completed. id=[{connection.ConnectionId}], length=[{buffer.Length}]");
 
                     foreach (var segment in buffer)
                     {
