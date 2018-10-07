@@ -1,5 +1,3 @@
-using System;
-
 namespace BlazorComplexExample.Models
 {
     public class ErrorViewModel
