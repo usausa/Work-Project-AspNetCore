@@ -1,4 +1,9 @@
-﻿namespace BlazorComplexExample
+﻿using System.Linq;
+using System.Net.Mime;
+using Microsoft.AspNetCore.Blazor.Server;
+using Microsoft.AspNetCore.ResponseCompression;
+
+namespace BlazorComplexExample
 {
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -19,6 +24,15 @@
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddResponseCompression(options =>
+            {
+                options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[]
+                {
+                    MediaTypeNames.Application.Octet,
+                    WasmMediaTypeNames.Application.Wasm,
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,6 +56,16 @@
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.Map("/app1", config =>
+            {
+                config.UseBlazor<BlazorComplexExample.App1.Startup>();
+            });
+
+            //app.Map("/app2", config =>
+            //{
+            //    config.UseBlazor<BlazorComplexExample.App2.Startup>();
+            //});
         }
     }
 }
