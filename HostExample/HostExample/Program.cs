@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
 
 namespace HostExample
 {
@@ -12,19 +13,33 @@ namespace HostExample
         public static async Task Main(string[] args)
         {
             await new HostBuilder()
-                .ConfigureAppConfiguration((hostContext, configApp) =>
+                .ConfigureAppConfiguration((hostContext, app) =>
                 {
-                    configApp.SetBasePath(Directory.GetCurrentDirectory());
-                    configApp.AddJsonFile("appsettings.json", optional: true);
-                    configApp.AddJsonFile($"appsettings.{hostContext.HostingEnvironment.EnvironmentName}.json",
-                        optional: true);
-                    configApp.AddEnvironmentVariables(prefix: "HOST_EXAMPLE_");
-                    configApp.AddCommandLine(args);
+                    // https://github.com/aspnet/AspNetCore/issues/4150
+                    hostContext.HostingEnvironment.EnvironmentName = System.Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+                    app.SetBasePath(Directory.GetCurrentDirectory());
+                    app.AddJsonFile("appsettings.json", optional: true);
+                    app.AddJsonFile($"appsettings.{hostContext.HostingEnvironment.EnvironmentName}.json", optional: true);
+                    app.AddEnvironmentVariables(prefix: "HOST_EXAMPLE_");
+                    app.AddCommandLine(args);
                 })
-                .ConfigureLogging((hostContext, configLogging) =>
+                .ConfigureLogging((hostingContext, logging) =>
                 {
-                    configLogging.AddConsole();
-                    configLogging.AddDebug();
+                    logging.ClearProviders();
+                    logging.SetMinimumLevel(LogLevel.Information);
+
+                    if (hostingContext.HostingEnvironment.IsDevelopment())
+                    {
+                        logging.AddConsole();
+                        logging.AddDebug();
+                    }
+
+                    logging.AddNLog(new NLogProviderOptions
+                    {
+                        CaptureMessageTemplates = true,
+                        CaptureMessageProperties = true
+                    });
                 })
                 .ConfigureServices(ConfigureServices)
                 .UseConsoleLifetime()
