@@ -2,12 +2,14 @@
 {
     using Microsoft.AspNetCore.Mvc;
 
+    using SubAreaExample.Areas.Area1.Models;
+
     [Area("area1")]
     public class DataController : Controller
     {
         public IActionResult List()
         {
-            return View();
+            return View(new DataViewModel { Text = "Area1" });
         }
     }
 }

@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNetCore.Mvc;
 
+    using SubAreaExample.Areas.Area1.SubArea1.Models;
     using SubAreaExample.Infrastructure;
 
     [Area("area1")]
@@ -10,7 +11,7 @@
     {
         public IActionResult List()
         {
-            return View();
+            return View(new DataViewModel { Text = "Area1/SubArea1" });
         }
     }
 }

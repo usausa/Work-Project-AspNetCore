@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Area2\Controllers\" />
-    <Folder Include="Areas\Area2\Views\" />
   </ItemGroup>
 
 </Project>
