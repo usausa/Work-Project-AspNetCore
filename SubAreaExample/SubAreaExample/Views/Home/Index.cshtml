@@ -2,7 +2,39 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<ul>
+    <li>
+        <a asp-area="Area1" asp-controller="Home" asp-action="Index">Area1 Home</a>
+        <ul>
+            <li>
+                <a asp-area="Area1" asp-route-subarea="SubArea1" asp-controller="Home" asp-action="Index">SubArea1 Home</a>
+            </li>
+            <li>
+                <a asp-area="Area1" asp-route-subarea="SubArea1" asp-controller="Data" asp-action="List">SubArea1 Data</a>
+            </li>
+            <li>
+                <a asp-area="Area1" asp-route-subarea="SubArea2" asp-controller="Home" asp-action="Index">SubArea2 Home</a>
+            </li>
+            <li>
+                <a asp-area="Area1" asp-route-subarea="SubArea2" asp-controller="Data" asp-action="List">SubArea1 Data</a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a asp-area="Area2" asp-controller="Home" asp-action="Index">Area2</a>
+        <ul>
+            <li>
+                <a asp-area="Area2" asp-route-subarea="SubArea1" asp-controller="Home" asp-action="Index">SubArea1 Home</a>
+            </li>
+            <li>
+                <a asp-area="Area2" asp-route-subarea="SubArea1" asp-controller="Data" asp-action="List">SubArea1 Data</a>
+            </li>
+            <li>
+                <a asp-area="Area2" asp-route-subarea="SubArea2" asp-controller="Home" asp-action="Index">SubArea2 Home</a>
+            </li>
+            <li>
+                <a asp-area="Area2" asp-route-subarea="SubArea2" asp-controller="Data" asp-action="List">SubArea1 Data</a>
+            </li>
+        </ul>
+    </li>
+</ul>
