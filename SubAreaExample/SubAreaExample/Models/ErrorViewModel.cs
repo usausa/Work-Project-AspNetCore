@@ -1,5 +1,3 @@
-using System;
-
 namespace SubAreaExample.Models
 {
     public class ErrorViewModel
