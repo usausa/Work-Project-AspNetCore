@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<ul>
+    <li>
+        <a asp-area="Area1" asp-controller="Home" asp-action="Index">Area1 Home</a>
+        <ul>
+            <li>
+                <a asp-area="Area1" asp-route-subarea="SubArea1" asp-controller="Home" asp-action="Index">SubArea1 Home</a>
+            </li>
+            <li>
+                <a asp-area="Area1" asp-route-subarea="SubArea1" asp-controller="Data" asp-action="List">SubArea1 Data</a>
+            </li>
+            <li>
+                <a asp-area="Area1" asp-route-subarea="SubArea2" asp-controller="Home" asp-action="Index">SubArea2 Home</a>
+            </li>
+            <li>
+                <a asp-area="Area1" asp-route-subarea="SubArea2" asp-controller="Data" asp-action="List">SubArea1 Data</a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a asp-area="Area2" asp-controller="Home" asp-action="Index">Area2</a>
+        <ul>
+            <li>
+                <a asp-area="Area2" asp-route-subarea="SubArea1" asp-controller="Home" asp-action="Index">SubArea1 Home</a>
+            </li>
+            <li>
+                <a asp-area="Area2" asp-route-subarea="SubArea1" asp-controller="Data" asp-action="List">SubArea1 Data</a>
+            </li>
+            <li>
+                <a asp-area="Area2" asp-route-subarea="SubArea2" asp-controller="Home" asp-action="Index">SubArea2 Home</a>
+            </li>
+            <li>
+                <a asp-area="Area2" asp-route-subarea="SubArea2" asp-controller="Data" asp-action="List">SubArea1 Data</a>
+            </li>
+        </ul>
+    </li>
+</ul>
