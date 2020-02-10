@@ -1,17 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Prometheus;
-
 namespace WebApplication
 {
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Data.Sqlite;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+
+    using Prometheus;
+
+    using Smart.Data;
+    using Smart.Data.Accessor.Resolver;
+    using Smart.Data.Mapper;
+    using Smart.Resolver;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -27,8 +29,16 @@ namespace WebApplication
             services.AddControllersWithViews();
         }
 
+        public void ConfigureContainer(ResolverConfig config)
+        {
+            config.UseDataAccessor();
+            config.BindSingleton<IDbProvider>(new DelegateDbProvider(() => new SqliteConnection("Data Source=test.db")));
+
+            config.BindSingleton<SmartMetrics>();
+        }
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, SmartMetrics metrics, IDbProvider dbProvider)
         {
             if (env.IsDevelopment())
             {
@@ -45,7 +55,6 @@ namespace WebApplication
 
             app.UseRouting();
             app.UseHttpMetrics();
-            Counters.SetupCallback();
 
             app.UseAuthorization();
 
@@ -56,6 +65,18 @@ namespace WebApplication
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
                 endpoints.MapMetrics();
+            });
+
+            AppMetrics.AddMetricsToRegistry(Metrics.DefaultRegistry);
+            metrics.AddMetricsToRegistry(Metrics.DefaultRegistry);
+
+            dbProvider.Using(con =>
+            {
+                con.Execute("CREATE TABLE IF NOT EXISTS Data (Id int PRIMARY KEY, Name text, Type text)");
+                con.Execute("DELETE FROM Data");
+                con.Execute("INSERT INTO Data (Id, Name, Type) VALUES (1, 'Name-1', 'A')");
+                con.Execute("INSERT INTO Data (Id, Name, Type) VALUES (2, 'Name-2', 'B')");
+                con.Execute("INSERT INTO Data (Id, Name, Type) VALUES (3, 'Name-3', 'A')");
             });
         }
     }

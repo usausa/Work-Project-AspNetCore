@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="3.1.1" />
     <PackageReference Include="prometheus-net" Version="3.4.0" />
     <PackageReference Include="prometheus-net.AspNetCore" Version="3.4.0" />
     <PackageReference Include="Usa.Smart.Core" Version="1.8.1" />
@@ -17,6 +18,14 @@
     <PackageReference Include="Usa.Smart.Resolver" Version="1.9.2" />
     <PackageReference Include="Usa.Smart.Resolver.Extensions.Configuration" Version="1.9.2" />
     <PackageReference Include="Usa.Smart.Resolver.Extensions.DependencyInjection" Version="1.9.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <SqlFiles Remove="Accessor\Sql\IDataAccessor.QueryDataAsync.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <SqlFiles Remove="Accessor\Sql\IDataAccessor.QueryDataListAsync.sql" />
   </ItemGroup>
 
 </Project>

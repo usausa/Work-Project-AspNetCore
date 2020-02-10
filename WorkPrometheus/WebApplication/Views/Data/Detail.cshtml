@@ -1,0 +1,21 @@
+﻿@model DataEntity
+@{
+    ViewData["Title"] = "Detail Page";
+}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Type</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>@Model.Id</td>
+        <td>@Model.Name</td>
+        <td>@Model.Type</td>
+    </tr>
+    </tbody>
+</table>
