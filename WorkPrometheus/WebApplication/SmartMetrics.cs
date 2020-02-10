@@ -35,12 +35,12 @@ namespace WebApplication
         public SmartMetrics(SmartResolver resolver, ExecuteEngine executeEngine)
         {
             this.resolver = resolver;
-            this.engineController = executeEngine;
+            engineController = executeEngine;
         }
 
         public void AddMetricsToRegistry(CollectorRegistry registry)
         {
-            Metrics.DefaultRegistry.AddBeforeCollectCallback(() =>
+            registry.AddBeforeCollectCallback(() =>
             {
                 var resolverDiagnostics = resolver.Diagnostics;
                 ResolverFactoryCacheCount.Set(resolverDiagnostics.FactoryCacheCount);
