@@ -31,7 +31,7 @@ namespace Smart.AspNetCore.Http
             {
                 var stream = new MemoryStream();
 
-                await using (var source = encodingType == EncodingType.Gzip
+                using (var source = encodingType == EncodingType.Gzip
                     ? (Stream)new GZipStream(context.Request.Body, CompressionMode.Decompress, true)
                     : new DeflateStream(context.Request.Body, CompressionMode.Decompress, true))
                 {
