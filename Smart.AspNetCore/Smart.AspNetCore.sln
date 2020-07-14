@@ -18,8 +18,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Smart.AspNetCore.sln.DotSettings = Smart.AspNetCore.sln.DotSettings
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.WebApplication", "Example.WebApplication\Example.WebApplication.csproj", "{F420FED1-B384-47C2-B151-B8C9E719B8F1}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,10 +28,6 @@ Global
 		{416DECC2-FAD4-4085-BF48-7F5B7ED291B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{416DECC2-FAD4-4085-BF48-7F5B7ED291B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{416DECC2-FAD4-4085-BF48-7F5B7ED291B4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F420FED1-B384-47C2-B151-B8C9E719B8F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F420FED1-B384-47C2-B151-B8C9E719B8F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F420FED1-B384-47C2-B151-B8C9E719B8F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F420FED1-B384-47C2-B151-B8C9E719B8F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
